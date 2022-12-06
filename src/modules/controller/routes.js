@@ -1,8 +1,7 @@
-const { usuariosRouter } = require('./usuarios/usuarios.controller');
 const { lectoresRouter } = require('./lectores/lector.controller');
-
+const {userRouter} = require ('./usuarios/usuarios.controller');
 
 module.exports = {
-    usuariosRouter,
-    lectoresRouter
+    lectoresRouter,
+    userRouter,
 };

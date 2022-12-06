@@ -1,39 +1,22 @@
-const { query } = require('../../../utils/mysql');
-
-const findAll = async () => {
-    const sql = `SELECT * FROM usuarios`;
-    return await query(sql,[]);
-};
-
-
-const findById = async (id) => {
-    if(Number.isNaN(id)) throw Error('Wrong type');
-    if (!id) throw Error('Missing fields');
-    const sql = `SELECT * FROM usuarios where idusuario = ?`;
-    return await query(sql,[id]);
-};
-
+const { hashPassword } = require ('../../../utils/functions');
+const { query } = require ('../../../utils/mysql');
 
 const save = async (user) => {
-    if(
-        !user.username||
-        !user.email ||
-        !user.contrasenia ||
-        !user.idlector
-    ) throw Error ('Missing fields');
-
-    const sql = `INSERT INTO (username,email,contrasenia,idlector) VALUES (?,?,?,?)`;
-    const { insertedId } = await query (sql,[
+    if(!user.username || !user.email || !user.contrasenia || !user.idlector)
+    throw Error ('Missihg fields');
+    const hashedPassword = await hashPassword(user.contrasenia)
+    const sql = `INSERT INTO usuarios(username,email,contrasenia,idlector)
+    VALUES (?,?,?,?)`;
+    const { insertId } = await query(sql,[
         user.username,
         user.email,
-        user.contrasenia,
-        user.idlector
+        hashedPassword,
+        user.idlector,
     ]);
-    return {...user,id: insertedId};
-};
+    delete user.contrasenia;
+    return{...user,id: insertId};
+}
 
 module.exports = {
-    findAll,
-    findById,
-    save
+    save,
 };

@@ -1,7 +1,7 @@
 const express = require('express');
 require('dotenv').config(); //imports
 const cors = require('cors');
-const { usuariosRouter,lectoresRouter } = require('../modules/controller/routes');
+const { lectoresRouter,userRouter } = require('../modules/controller/routes');
 
 const app = express(); //Instanciar server
 app.set('port', process.env.PORT || 3000);
@@ -15,8 +15,8 @@ app.get('/', (request, response) => {
   response.send('Bienvenido a la AppRest StudyPad');
 }); //Endpoints
 //http://localhost:3000/ -> Primer Endpoint
-app.use(`/api/user`,usuariosRouter);
 app.use(`/api/lector`,lectoresRouter);
+app.use(`/api/user`,userRouter);
 
 module.exports = {
   app,

@@ -28,7 +28,7 @@ const validatePassword = async (password, hashedPassword) => {
   return await bcrypt.compare(password, hashedPassword);
 }
 
-module.exports = {
+module.exports = { 
   validateError,
   hashPassword,
   validatePassword,
