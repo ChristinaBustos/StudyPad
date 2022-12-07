@@ -1,7 +1,7 @@
 const express = require('express');
 require('dotenv').config(); //imports
 const cors = require('cors');
-const { lectoresRouter,userRouter } = require('../modules/controller/routes');
+const { lectoresRouter,userRouter,bookRouter } = require('../modules/controller/routes');
 
 const app = express(); //Instanciar server
 app.set('port', process.env.PORT || 3000);
@@ -17,6 +17,7 @@ app.get('/', (request, response) => {
 //http://localhost:3000/ -> Primer Endpoint
 app.use(`/api/lector`,lectoresRouter);
 app.use(`/api/user`,userRouter);
+app.use(`/api/book/`,bookRouter);
 
 module.exports = {
   app,

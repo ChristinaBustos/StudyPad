@@ -33,8 +33,31 @@ const save = async (lector) => {
      return {...lector,id: insertedId};
 };
 
+const modify = async(lector)=> {
+    if( !lector.idlector||
+        !lector.nombre||
+        !lector.apellidop||
+        !lector.fechanacimiento ||
+        !lector.carrera||
+        !lector.genero
+    ) throw Error ('Missing fields');
+    const sql = 'UPDATE  `lectores` SET `nombre` = ?,`apellidop` = ?,`apellidom` = ?,`fechanacimiento` = ?,`carrera` = ?,`genero` = ? WHERE `idlector` = ?';
+    const { insertedId } = await query(sql, [
+        lector.nombre,
+        lector.apellidop,
+        lector.apellidom || null,
+        lector.fechanacimiento,
+        lector.carrera,
+        lector.genero,
+        lector.idlector,
+     ]);
+     return {...lector,id: insertedId};
+}
+
+
 module.exports = {
     findAll,
     findById,
-    save
+    save,
+    modify
 };
