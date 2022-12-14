@@ -1,0 +1,54 @@
+<form #personalForm="ngForm" novalidate (submit)="saveLibro()">
+    <h2 mat-dialog-title>Register Libro</h2>
+    <mat-dialog-content class="mat-typography">
+        <div class="row form-group mb-3">
+            <div class="col">
+                <mat-form-field appearance="fill" class="w-100">
+                    <mat-label>Name</mat-label>
+                    <input matInput
+                           placeholder="Crud Angular"
+                           #titulo="ngModel"
+                           name="titulo"
+                           [(ngModel)]="book.titulo"
+                           required>
+                    <mat-error *ngIf="titulo.invalid">
+                        <span *ngIf="titulo.errors?.['required']">
+                            Campo obligatorio
+                        </span>
+                    </mat-error>
+                </mat-form-field>
+            </div>
+            <div class="col">
+                <mat-form-field appearance="fill" class="w-100">
+                    <mat-label>descripcion</mat-label>
+                    <input matInput
+                           placeholder="Crud Angular"
+                           #descripcion="ngModel"
+                           name="descripcion"
+                           [(ngModel)]="book.descripcion"
+                           required>
+                    <mat-error *ngIf="descripcion.invalid">
+                        <span *ngIf="descripcion.errors?.['required']">
+                            Campo obligatorio
+                        </span>
+                    </mat-error>
+                </mat-form-field>
+            </div>
+        </div>
+        <div class="row">
+            <input type="file" class="w-100 form-control" accept="application/pdf,image/*"
+                   (change)="previewFile($event)"/>
+            <img [src]="loadedFile" />
+        </div>
+    </mat-dialog-content>
+    <mat-dialog-actions align="end">
+        <button type="button" mat-button mat-dialog-close>
+            <mat-icon>close</mat-icon>
+            Cancel
+        </button>
+        <button mat-button type="submit" [disabled]="personalForm.invalid">
+            <mat-icon>check</mat-icon>
+            Save
+        </button>
+    </mat-dialog-actions>
+</form>

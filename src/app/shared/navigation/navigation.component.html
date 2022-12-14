@@ -1,0 +1,71 @@
+
+<div>
+  <div *ngIf="session.logged">
+    <mat-sidenav-container class="sidenav-container">
+      <mat-sidenav
+        #drawer
+        class="sidenav"
+        fixedInViewport
+        [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
+        [mode]="(isHandset$ | async) ? 'over' : 'side'"
+        [opened]="(isHandset$ | async) === false"
+      >
+        <mat-toolbar class="justify-content-center">
+          <img
+            mat-card-image
+            [src]="logoPath"
+            alt="STUDYPAD"
+            style="width: 70%; height: auto; display: inline; margin-top: 15px;"
+          />
+        </mat-toolbar>
+        <mat-nav-list>
+            <img [src]="userPath" class="rounded float-start mx-3" width="35"
+            height="35"/>
+          <a mat-list-item routerLink="lector">Usuarios</a>
+          <img [src]="libroPath" class="rounded float-start mx-3" width="35"
+          height="35"/>
+          <a mat-list-item routerLink="user">Libros</a>
+          <img [src]="catePath" class="rounded float-start mx-3" width="35"
+          height="35"/>
+          <a mat-list-item routerLink="position">Categorías</a>
+          <img [src]="capPath" class="rounded float-start mx-3" width="35"
+          height="35"/>
+          <a mat-list-item routerLink="">Capítulos</a>
+        </mat-nav-list>
+      </mat-sidenav>
+      <mat-sidenav-content class="row">
+        <mat-toolbar color="primary">
+          <button
+            type="button"
+            aria-label="Toggle sidenav"
+            mat-icon-button
+            (click)="drawer.toggle()"
+            *ngIf="isHandset$ | async"
+          >
+            <mat-icon aria-label="Side nav toggle icon">Menu</mat-icon>
+          </button> 
+          <div class="col text-end">
+            <button mat-button [matMenuTriggerFor]="menu">
+              <mat-icon>more_vert</mat-icon>
+            </button>
+            <mat-menu #menu="matMenu">
+              <button mat-menu-item><mat-icon>person</mat-icon> Perfil</button>
+              <button mat-menu-item (click)="logout()"><mat-icon>logout</mat-icon> Log out</button>
+            </mat-menu>
+          </div>
+        </mat-toolbar>
+        <!-- Add Content Here -->
+        <div class="container-fluid border">
+          <div class="row">
+            <div class="col">
+              <router-outlet></router-outlet>
+            </div>
+          </div>
+        </div>
+      </mat-sidenav-content>
+    </mat-sidenav-container>
+  </div>
+  <div *ngIf="!session.logged">
+    <app-signin></app-signin>
+  </div>
+</div>

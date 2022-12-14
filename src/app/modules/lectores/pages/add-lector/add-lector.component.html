@@ -1,0 +1,111 @@
+<form #lectorForm="ngForm" novalidate (submit)="saveLector()">
+    <h2 mat-dialog-title>Register Lector</h2>
+    <mat-dialog-content class="mat-typography">
+        <div class="row form-group mb-3">
+            <div class="col">
+                <mat-form-field appearance="fill" class="w-100">
+                    <mat-label>Nombre</mat-label>
+                    <input matInput
+                           placeholder="Anna"
+                           #nombre="ngModel"
+                           name="nombre"
+                           [(ngModel)]="lector.nombre"
+                           required>
+                    <mat-error *ngIf="nombre.invalid">
+                        <span *ngIf="nombre.errors?.['required']">
+                            Campo obligatorio
+                        </span>
+                    </mat-error>
+                </mat-form-field>
+            </div>
+            <div class="col">
+                <mat-form-field appearance="fill" class="w-100">
+                    <mat-label>Apellido Paterno</mat-label>
+                    <input matInput
+                           placeholder="Bustos"
+                           #apellidop="ngModel"
+                           name="apellidop"
+                           [(ngModel)]="lector.apellidop"
+                           required>
+                    <mat-error *ngIf="apellidop.invalid">
+                        <span *ngIf="apellidop.errors?.['required']">
+                            Campo obligatorio
+                        </span>
+                    </mat-error>
+                </mat-form-field>
+            </div>
+        </div>
+        <div class="row form-group mb-3">
+            <div class="col">
+                <mat-form-field appearance="fill" class="w-100">
+                    <mat-label>Apellido Materno</mat-label>
+                    <input matInput
+                           placeholder="Rosales"
+                           #apellidom="ngModel"
+                           name="apellidom"
+                           [(ngModel)]="lector.apellidom"
+                    >
+                </mat-form-field>
+            </div>
+            <div class="col">
+                <mat-form-field appearance="fill" class="w-100">
+                    <mat-label>Birthday</mat-label>
+                    <input matInput
+                           type="date"
+                           #fechanacimiento="ngModel"
+                           name="fechanacimiento"
+                           [(ngModel)]="lector.fechanacimiento"
+                           required>
+                    <mat-error *ngIf="fechanacimiento.invalid">
+                        <span *ngIf="fechanacimiento.errors?.['required']">
+                            Campo obligatorio
+                        </span>
+                    </mat-error>
+                </mat-form-field>
+            </div>
+        </div>
+        <div class="col">
+            <mat-form-field appearance="fill" class="w-100">
+                <mat-label>Carrera</mat-label>
+                <input matInput
+                       placeholder="Programación"
+                       #carrera="ngModel"
+                       name="carrera"
+                       [(ngModel)]="lector.carrera"
+                       required>
+                <mat-error *ngIf="carrera.invalid">
+                    <span *ngIf="carrera.errors?.['required']">
+                        Campo obligatorio
+                    </span>
+                </mat-error>
+            </mat-form-field>
+        </div>
+        <div class="col">
+            <mat-form-field appearance="fill" class="w-100">
+                <mat-label>Genero</mat-label>
+                <input matInput
+                       placeholder="Mujer"
+                       #genero="ngModel"
+                       name="genero"
+                       [(ngModel)]="lector.genero"
+                       required>
+                <mat-error *ngIf="genero.invalid">
+                    <span *ngIf="genero.errors?.['required']">
+                        Campo obligatorio
+                    </span>
+                </mat-error>
+            </mat-form-field>
+        </div>
+       
+    </mat-dialog-content>
+    <mat-dialog-actions align="end">
+        <button type="button" mat-button mat-dialog-close>
+            <mat-icon>close</mat-icon>
+            Cancel
+        </button>
+        <button mat-button type="submit" [disabled]="lectorForm.invalid">
+            <mat-icon>check</mat-icon>
+            Save
+        </button>
+    </mat-dialog-actions>
+</form>
